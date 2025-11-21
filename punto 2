@@ -1,0 +1,36 @@
+2. Diseño Orientado a Aspectos (AOP)
+Conceptos clave: Concern, Cross-cutting concern, Join point, Pointcut, Advice, Aspect
+Preocupaciones transversales: Logging, Performance Monitoring, Validation, Error
+Handling, Caching, Profling
+Código Core (sin aspectos):
+class LinearRegression:
+def predict(self, X): return self.w * X + self.b
+def compute
+_gradients(self, X, y, error):
+m = len(X)
+dw = (2/m) * np.dot(error, X)
+db = (2/m) * np.sum(error)
+return dw, db
+def train(self, X, y):
+for epoch in range(self.epochs):
+y_pred = self.predict(X)
+error = y_pred - y
+dw, db = self.compute
+_gradients(X, y, error)
+self.update
+_parameters(dw, db)
+Aspectos aplicados:
+2.4 Diseño de Aspectos
+Logging: Before train() → log "Iniciando"
+. After each 200 epochs → log MSE, w, b
+Performance: Around train() → medir tiempo. Around predict() → cache resultados
+Validation: After compute
+_gradients() → verifcar no hay NaN. After update →
+validar convergencia
+Convergence: Monitorear MSE improvement. Si < threshold 10 épocas → early stop
+Caching: Cache de predicciones con hash(X, w, b) como key
+Join Points: Method execution (train, predict), feld access (w, b), exception handling, loop
+iterations
+Weaving: Compilador AspectJ/Spring inserta advices en compile-time. Resultado: código
+limpio + debug/monitoring automático
+Ventajas: Separación de concerns, reutilización, mantenibilidad, debugging integrado
