@@ -1,0 +1,30 @@
+fn main() {
+    let x = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+    let y = vec![2.0, 4.0, 6.0, 8.0, 10.0];
+
+    let mut w = 0.0;
+    let mut b = 0.0;
+    let lr = 0.01;
+    let epochs = 1000;
+    let m = x.len() as f64;
+
+    for _ in 0..epochs {
+        let mut dw = 0.0;
+        let mut db = 0.0;
+
+        for i in 0..x.len() {
+            let y_pred = w * x[i] + b;
+            let error = y_pred - y[i];
+            dw += error * x[i];
+            db += error;
+        }
+
+        dw = (2.0 / m) * dw;
+        db = (2.0 / m) * db;
+
+        w -= lr * dw;
+        b -= lr * db;
+    }
+
+    println!("w = {}, b = {}", w, b);
+}
